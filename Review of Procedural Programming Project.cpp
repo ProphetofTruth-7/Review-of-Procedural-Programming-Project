@@ -5,6 +5,6 @@ using namespace std;
 
 int main()
 {
-    cout << "Ro ShamBo\n";
+    cout << "Hello! Ready to Ro, Sham, and Bo?\n";
     return 0;
 }
