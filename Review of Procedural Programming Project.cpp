@@ -6,6 +6,7 @@ using namespace std;
 
 int userChoiceCheck(int& x);
 int victoryCheck(int x, int y);
+void scoreUpdate(int x);
 
 
 int main()
@@ -15,13 +16,14 @@ int main()
     uniform_int_distribution<>  dist(1, 3);   //RNG Establishment. Kept separate to prevent hyper-establishment
 
     int roShamBoChoice = 0;
-    cout << "Hello! Ready to Ro, Sham, and Bo?\n";
+    cout << "Hello! Ready to Ro, Sham, and Bo?(1 for Rock, 2 for Paper, 3 for Scissors, 4 to end the game)\n";
 
     do {
         userChoiceCheck(roShamBoChoice);
         int botChoice = dist(gen);  //Random Number, Move to Function
-        cout << botChoice << endl;
-        victoryCheck(botChoice, roShamBoChoice);
+        if (roShamBoChoice != 4) {
+            cout << victoryCheck(botChoice, roShamBoChoice) << endl;    //This couts the 0, 1, and 2 you're seeing, doofus. Don't forget
+        }
     } while (roShamBoChoice != 4);
 
     cout << "GAME OVER!" << endl;
@@ -30,7 +32,8 @@ int main()
 
 int userChoiceCheck(int& x) {
     do {
-        cout << "Input 1 for Rock, 2 for Paper, 3 for Scissors, and 4 to end the game" << endl;
+        cout << endl;
+        cout << "Your Pick: ";
         cin >> x;
     } while (x > 4 || x<1);
     return x;
