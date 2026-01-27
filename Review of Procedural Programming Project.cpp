@@ -1,10 +1,10 @@
-// Main Branch
+// Grade Book Branch
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    cout << "This is the Main Branch! Don't code here, dummy\n";
+    cout << "This is the Grade Book Subproject\n";
     return 0;
 }
