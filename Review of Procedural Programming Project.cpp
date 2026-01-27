@@ -58,14 +58,14 @@ int victoryCheck(int x, int y) {  // Checks the User and the Bots choices, and r
             return 1;
         }
         if (x == 2 && y == 3) {
-            cout << "You chose Scissors, RoShamBot chose Paper! You Wins!" << endl;
+            cout << "You chose Scissors, RoShamBot chose Paper! You Win!" << endl;
             return 2;
         }
         if (x == 3 && y == 1) {
             cout << "You chose Rock, RoShamBot chose Scissors! You Win!" << endl;
             return 2;
         }
-        if (x == 3 && y == 1) {
+        if (x == 3 && y == 2) {
             cout << "You chose Paper, RoShamBot chose Scissors! RoShamBot Wins!" << endl;
             return 1;
         }
