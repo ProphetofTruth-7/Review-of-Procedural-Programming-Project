@@ -1,4 +1,4 @@
-// Main Branch
+// RoShamBo Subproject
 
 #include <iostream>
 using namespace std;
