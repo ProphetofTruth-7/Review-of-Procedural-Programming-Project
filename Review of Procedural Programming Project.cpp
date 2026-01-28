@@ -4,10 +4,10 @@
 #include <random>
 using namespace std;
 
-int userChoiceCheck(int& x);
-int victoryCheck(int x, int y);
-void scoreUpdate(int x, int& y, int& z);
-void declareVictory(int x, int y);
+int userChoiceCheck(int& x); //Validates the User's choice and if it fell within acceptable bounds
+int victoryCheck(int x, int y); //Compares the User and RoShamBot choices, picking out a winner
+void scoreUpdate(int x, int& y, int& z); //Updates the score of the User or RoShamBot, depending on who won
+void declareVictory(int x, int y); //Compares the User and RoShamBot scores and declares a victory
 
 
 int main()
@@ -21,7 +21,7 @@ int main()
 
     do {
         userChoiceCheck(roShamBoChoice);
-        int botChoice = dist(gen);  //Random Number, Move to Function
+        int botChoice = dist(gen);  //Random Number Generator
         if (roShamBoChoice != 4) {
             scoreUpdate(victoryCheck(botChoice, roShamBoChoice), roShamBotScore, userScore);
         }
