@@ -16,15 +16,5 @@ int main()
         return 1;
     }
 
-    int fileVariable = 0;
-    string fileString = "L";
-    int numberOfGrades = 0;
-
-    cout << "How many grades were each of these students assigned?" << endl;
-
-
-
-
-    cout << "This is the Grade Book Subproject\n";
     return 0;
 }
