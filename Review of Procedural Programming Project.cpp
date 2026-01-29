@@ -17,11 +17,24 @@ int main()
 
 
     const int TOTALSCORES = 5;
-
     string testy;
+    int loopIncrement = 0;
 
-    getline(inFile, testy);   //How do I split the Name from the Test Scores? This reads the entire line no matter what
-    cout << testy << endl;
+    string StudentNameArray[10]; //Partially Filled Array for Student Names. 10 is Arbitary
+    int currentSize; // Used for the size of other Arrays. Depends on how filled the StudentNameArray is
+    int TestScoresArray[currentSize][TOTALSCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
+    double AverageScoreArray[currentSize]; //Filled Array. Empty for now, 5 spots for 5 students.
+
+
+
+    getline(inFile, testy, ' '); //Ensure each value on attached file ends with a space. Failure to do so will cause errors
+    cout << testy << " ";
+
+    do {
+        getline(inFile, testy, ' ');
+        cout << testy << " ";
+        ++loopIncrement;
+    } while (loopIncrement < (TOTALSCORES));
 
     return 0;
 }
