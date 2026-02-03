@@ -5,6 +5,10 @@
 #include <string>
 using namespace std;
 
+const int TOTAL_SCORES = 5;
+const int MAX_STUDENTS = 35;
+
+
 string firstName(ifstream& x, string y) {
     getline(x, y, ' ');
     return y;
@@ -25,6 +29,23 @@ void storeNames(ifstream& x, string y, string array[], int z, int& a) {    //Not
     //Mainly, I just want to know whats the better way to do this. The Partially Filled examples
 }
 
+int studentDataRetrieval(ifstream& x, string student[], double scores[MAX_STUDENTS][TOTAL_SCORES], string y, int a) {
+    int counter = 0, gradeIncrement = 0;
+
+    while (counter < MAX_STUDENTS && x >> student[counter]) {
+        gradeIncrement = 0;
+        getline(x, y, ' ');
+        student[counter] = y;
+        do {
+            getline(x, y, ' ');
+            scores[counter][gradeIncrement] = a;
+            gradeIncrement++;
+        } while (gradeIncrement < TOTAL_SCORES);
+        ++counter;
+    }
+    return counter;
+}
+
 int main()
 {
     string filename = "StudentGrades.txt"; //File Initialization bits
@@ -35,15 +56,20 @@ int main()
     }
 
 
-    const int TOTALSCORES = 5;
-    string fileIndexVar;
 
-    string StudentNameArray[10]; //Partially Filled Array for Student Names. 10 is Arbitary
+
+
+    string fileIndexVar;
+    int fileIndexVar2;
+
+    string StudentNameArray[MAX_STUDENTS]; //Partially Filled Array for Student Names. 10 is Arbitary
     int currentSize = 0; // Used for the size of other Arrays. Depends on how filled the StudentNameArray is
-    int TestScoresArray[5][TOTALSCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
+    double TestScoresArray[MAX_STUDENTS][TOTAL_SCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
     double AverageScoreArray[5]; //Filled Array. Empty for now, 5 spots for 5 students.
 
-    storeNames(GRADEFILE, fileIndexVar, StudentNameArray, TOTALSCORES, currentSize);
+    cout << studentDataRetrieval(GRADEFILE, StudentNameArray, TestScoresArray[MAX_STUDENTS][TOTAL_SCORES], fileIndexVar, fileIndexVar2) << endl;
+
+    storeNames(GRADEFILE, fileIndexVar, StudentNameArray, TOTAL_SCORES, currentSize);
     cout << StudentNameArray[0] << endl;
     cout << StudentNameArray[1] << endl;
     cout << StudentNameArray[5] << endl;
