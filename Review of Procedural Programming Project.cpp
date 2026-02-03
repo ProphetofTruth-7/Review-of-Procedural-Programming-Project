@@ -9,18 +9,20 @@ string firstName(ifstream& x, string y) {
     getline(x, y, ' ');
     return y;
 }
-void storeNames(ifstream& x, string y, string array[], int z, int& a) {
+void storeNames(ifstream& x, string y, string array[], int z, int& a) {    //Not sure how to properly use a Partially Filled Array
     int nameIncrement = 0, gradeIncrement = 0;
 
     do {
         gradeIncrement = 0;
-        getline(x, y, ' ');
-        array[nameIncrement++] = y;
+        getline(x, y, ' ');  //Grabs the name and the name only
+        array[nameIncrement++] = y; //Puts said name into the StudentNameArray at its proper index
         do {
-            getline(x, y, ' ');
+            getline(x, y, ' '); //"Grabs" the numbers and ignores them
             gradeIncrement++;
-        } while (gradeIncrement < z);
-    } while (nameIncrement < 10);         //Arbitary 10
+        } while (gradeIncrement < z); //Continues until all numbers are ignored(according to the TOTALSCORES constant)
+    } while (nameIncrement < 10);  //This is where I mess up. I can't make this final check fluid. I either make it rigid(6) and perfectly fit the student number
+    //Or make it wide(10), which is just an array with extra steps(and I can't use currentSize
+    //Mainly, I just want to know whats the better way to do this. The Partially Filled examples
 }
 
 int main()
@@ -47,7 +49,6 @@ int main()
     cout << StudentNameArray[5] << endl;
     cout << StudentNameArray[9] << endl;
     cout << "Current Size: " << currentSize << endl;
-
 
     return 0;
 }
