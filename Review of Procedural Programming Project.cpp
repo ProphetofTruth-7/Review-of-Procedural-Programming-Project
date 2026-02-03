@@ -5,7 +5,23 @@
 #include <string>
 using namespace std;
 
-string firstName
+string firstName(ifstream& x, string y) {
+    getline(x, y, ' ');
+    return y;
+}
+void storeNames(ifstream& x, string y, string array[], int z) {
+    int increment = 0, gradeIncrement = 0;
+
+    do {
+        gradeIncrement = 0;
+        getline(x, y, ' ');
+        array[increment++] = y;
+        do {
+            getline(x, y, ' ');
+            gradeIncrement++;
+        } while (gradeIncrement < z);
+    } while (increment < 6);         //Figure out how to make this variable
+}
 
 int main()
 {
@@ -28,16 +44,10 @@ int main()
     int TestScoresArray[5][TOTALSCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
     double AverageScoreArray[5]; //Filled Array. Empty for now, 5 spots for 5 students.
 
-
-
-    getline(GRADEFILE, testy, ' '); //Ensure each value on attached file ends with a space. Failure to do so will cause errors
-    cout << testy << " ";
-
-    do {
-        getline(GRADEFILE, testy, ' ');
-        cout << testy << " ";
-        ++loopIncrement;
-    } while (loopIncrement < (TOTALSCORES));
+    storeNames(GRADEFILE, testy, StudentNameArray, TOTALSCORES);
+    cout << StudentNameArray[0] << endl;
+    cout << StudentNameArray[1] << endl;
+    cout << StudentNameArray[5] << endl;
 
     return 0;
 }
