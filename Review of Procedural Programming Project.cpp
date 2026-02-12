@@ -9,7 +9,7 @@ const int TOTAL_SCORES = 5;
 const int MAX_STUDENTS = 35;
 
 
-int studentDataRetrieval(ifstream& x, string student[], string scores[MAX_STUDENTS][TOTAL_SCORES], string y, double a) {
+int studentDataRetrieval(ifstream& x, string student[], string scores[MAX_STUDENTS][TOTAL_SCORES], string y) {
     int counter = 0, gradeIncrement = 0;
 
     while (counter < MAX_STUDENTS && x >> student[counter]) {
@@ -42,14 +42,12 @@ int main()
     double AverageScoreArray[MAX_STUDENTS]; //Filled Array. Empty for now, 5 spots for 5 students.
 
     string fileIndexVar;
-    double fileIndexVar2 = 0;
 
-    cout << "The Current Size is: " << studentDataRetrieval(GRADEFILE, StudentNameArray, TestScoresArray, fileIndexVar, fileIndexVar2) << endl;
+    cout << "The Current Size is: " << studentDataRetrieval(GRADEFILE, StudentNameArray, TestScoresArray, fileIndexVar) << endl;
 
     cout << "The First Student is: " << StudentNameArray[0] << endl;
     cout << TestScoresArray[0][0] << " " << TestScoresArray[0][1] << " " << " " << TestScoresArray[0][2] << " " << " " << TestScoresArray[0][3] << " " << " " << TestScoresArray[0][4] << endl;
     cout << TestScoresArray[5][0] << " " << TestScoresArray[5][1] << " " << " " << TestScoresArray[5][2] << " " << " " << TestScoresArray[5][3] << " " << " " << TestScoresArray[5][4] << endl;
-
 
     return 0;
 }
