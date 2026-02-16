@@ -1,6 +1,7 @@
 // Grade Book Branch
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 using namespace std;
@@ -9,27 +10,46 @@ const int TOTAL_SCORES = 5;
 const int MAX_STUDENTS = 35;
 
 
-int studentDataRetrieval(ifstream& x, string student[], string scores[MAX_STUDENTS][TOTAL_SCORES], string y, double k) {
-    int counter = 0, gradeIncrement = 0;
+int studentDataRetrieval(ifstream& x, string student[], double scores[MAX_STUDENTS][TOTAL_SCORES]) {
+    int counter = 0, i = 0;
 
     while (counter < MAX_STUDENTS && x >> student[counter]) {
-        gradeIncrement = 0;
-        getline(x, y, ' ');
-        student[counter] = y;    // It's no longer storing the names!!!
-        do {
-            x >> k;
-            scores[counter][gradeIncrement] = k;      //The scores Array (aka the TestScores Array) refuses to be assigned unless its a string
-            gradeIncrement++;
-        } while (gradeIncrement < TOTAL_SCORES);
+        for (int i = 0; i < TOTAL_SCORES; i++) {
+            x >> scores[counter][i];
+        }
         ++counter;
     }
     return counter;
 }
-void testFunction(ifstream& x, string scores[MAX_STUDENTS][TOTAL_SCORES], int& y) {
-    x >> y;
-    x >> y;
-    x >> y;
-    cout << y;
+void calcArrayAverage(double scores[MAX_STUDENTS][TOTAL_SCORES], double average[MAX_STUDENTS], int size) {
+    int counter = 0, counter2 = 0;
+
+    do {
+        double sum = 0;
+        do {
+            sum += scores[counter][counter2++];
+        } while (counter2 < TOTAL_SCORES);
+        average[counter] = sum/TOTAL_SCORES;
+        ++counter;
+        counter2 = 0;
+    } while (counter < size);
+}
+char gradeCalc(double average[MAX_STUDENTS], int current) {
+        if (average[current] > 89.9) {
+            return 'A';
+        }
+        else if (average[current] > 79.9) {
+            return 'B';
+        }
+        else if (average[current] > 69.9) {
+            return 'C';
+        }
+        else if (average[current] > 59.9) {
+            return 'D';
+        }
+        else {
+            return 'F';
+        }
 }
 
 
@@ -44,17 +64,19 @@ int main()
     }
 
     string StudentNameArray[MAX_STUDENTS]; //Partially Filled Array for Student Names
-    string TestScoresArray[MAX_STUDENTS][TOTAL_SCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
+    double TestScoresArray[MAX_STUDENTS][TOTAL_SCORES]; //Filled Array. 5 Rows for 5 Students, TOTALSCORES Columns for number of TestScores
     double AverageScoreArray[MAX_STUDENTS]; //Filled Array. Empty for now, 5 spots for 5 students.
+    int currentSize = studentDataRetrieval(GRADEFILE, StudentNameArray, TestScoresArray);
 
-    string fileIndexVar;
-    double testy = 0;
+    calcArrayAverage(TestScoresArray, AverageScoreArray, currentSize);
 
-    cout << "The Current Size is: " << studentDataRetrieval(GRADEFILE, StudentNameArray, TestScoresArray, fileIndexVar, testy) << endl;
+    int currentStudent = 0;
 
-    cout << "The First Student is: " << StudentNameArray[0] << endl;
-    cout << TestScoresArray[0][0] << " " << TestScoresArray[0][1] << " " << " " << TestScoresArray[0][2] << " " << " " << TestScoresArray[0][3] << " " << " " << TestScoresArray[0][4] << endl;
-    cout << TestScoresArray[5][0] << " " << TestScoresArray[5][1] << " " << " " << TestScoresArray[5][2] << " " << " " << TestScoresArray[5][3] << " " << " " << TestScoresArray[5][4] << endl;
+    cout << "Student Name" << setw(15) << "Average Score" << setw(15) << "Letter Grade" << endl;
+
+    for (int currentStudent = 0; currentStudent < currentSize; currentStudent++) {
+        cout << StudentNameArray[currentStudent] << setw(15) << AverageScoreArray[currentStudent] << setw(15) << gradeCalc(AverageScoreArray, currentStudent) << endl;
+    }
 
     return 0;
 }
